@@ -41,9 +41,25 @@ function App() {
 		fetchMoviesHandler();
 	}, [fetchMoviesHandler]);
 
-	function addMovieHandler(movie) {
-		console.log(movie);
-	}
+	//post
+	const addMovieHandler = async (movie) => {
+		try {
+			const res = await fetch(
+				"https://star-wars-demo-5ec8d-default-rtdb.firebaseio.com/movies.json",
+				{
+					method: "POST",
+					body: JSON.stringify(movie),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}
+			);
+			const data = await res.json();
+			console.log(data);
+		} catch (error) {
+			setError(error.message);
+		}
+	};
 
 	let content = <p>Found no movies.</p>;
 
