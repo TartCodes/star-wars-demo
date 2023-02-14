@@ -6,16 +6,26 @@ import "./App.css";
 
 function App() {
 	const [movies, setMovies] = useState([]);
-	const fetchMoviesHandlder = () => {
+	const fetchMoviesHandler = () => {
 		fetch("https://swapi.py4e.com/api/films/")
 			.then((res) => res.json())
-			.then((data) => setMovies(data.results));
+			.then((data) => {
+				const transformedMovies = data.results.map((movieData) => {
+					return {
+						id: movieData.episode_id,
+						title: movieData.title,
+						openingText: movieData.opening_crawl,
+						releaseData: movieData.release_date
+					};
+				});
+				setMovies(transformedMovies);
+			});
 	};
 
 	return (
 		<React.Fragment>
 			<section>
-				<button>Fetch Movies</button>
+				<button onClick={fetchMoviesHandler}>Fetch Movies</button>
 			</section>
 			<section>
 				<MoviesList movies={movies} />
