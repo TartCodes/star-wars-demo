@@ -13,7 +13,7 @@ function App() {
 		setIsLoading(true);
 		setError(null);
 		try {
-			const res = await fetch("https://swapi.py4e.com/api/film/");
+			const res = await fetch("https://swapi.py4e.com/api/films/");
 			if (!res.ok) {
 				throw new Error("Something went wrong...");
 			}
@@ -40,7 +40,7 @@ function App() {
 			</section>
 			<section>
 				{!isLoading && movies.length > 0 && <MoviesList movies={movies} />}
-				{!isLoading && movies.length === 0 && <p>Found No Movies</p>}
+				{!isLoading && movies.length === 0 && !error && <p>Found No Movies</p>}
 				{isLoading && <p>Loading...</p>}
 				{!isLoading && error && <p>{error}</p>}
 			</section>
