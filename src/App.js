@@ -9,6 +9,7 @@ function App() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
 
+	//get
 	const fetchMoviesHandler = useCallback(async () => {
 		setIsLoading(true);
 		setError(null);
